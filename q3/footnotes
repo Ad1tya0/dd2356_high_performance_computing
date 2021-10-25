@@ -1,0 +1,48 @@
+How to change environment in beskow?
+>module swap PrgEnv-cray PrgEnv-gnu
+
+
+what is the average running time?
+>0.00000000 s
+
+Increase N and compile the code, what is the average running time now?
+>0.00000000 s
+
+why is the execution time like that in the previous question when the flag -O2 is used? 
+Answer this question using the information you find in the assembly code.
+> Looking at the assembly code, it is obvious that the compiler did not generate anything for the array operations inside the for 
+loops. It is highly probable that because of using the -02 flag, the compiler tries to optimize the code and as the arrays aren't 
+used anywhere else in the loop, the compiler discards them and they are not compiled into assembly code. Hence, using the -02 flag
+only compiles the mysecond function, resulting in a very low execution time.
+
+
+What is the average execution time without the -O2 compilation flag?
+> for N = 5000:
+ RUN 1: 0.00007200 s 
+ RUN 2: 0.00008106 s
+ RUN 3: 0.00007296 s
+ RUN 4: 0.00007319 s
+ RUN 5: 0.00006604 s
+
+ AVG_5: 0.00007305 s
+
+for N = 15000:
+ RUN 1: 0.00022292 s 
+ RUN 2: 0.00022888 s
+ RUN 3: 0.00022697 s
+ RUN 4: 0.00022793 s
+ RUN 5: 0.00022197 s
+
+ AVG_5: 0.000225734 s
+
+
+  It is because not using the -02 flag doesn't optimize the code, hence it doesn't eliminate the arrays inside the loops.
+Increasing N increases the number of times the loops run, hence increasing the computation time.
+
+
+What is the clock granularity on Beskow or your local computer?
+>9.06 e-06 for my computer.
+
+
+
+
